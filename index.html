@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="de" style="scroll-behavior: smooth;">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="coconut.ico">
+  <title>CoconutSMP | Official</title>
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      user-select: none;
+    }
+
+    body {
+      background: linear-gradient(135deg, #fdf6e3, #f5e6ca);
+      color: #333;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* Sticky Header */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 60px;
+      backdrop-filter: blur(15px);
+      background: rgba(255, 255, 255, 0.4);
+      border-bottom: 1px solid rgba(181, 139, 58, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+    }
+
+    .logo img {
+      width: 45px;
+      border-radius: 50%;
+      transition: transform 0.3s;
+    }
+
+    .logo:hover img {
+      transform: rotate(15deg);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #5d4037;
+      margin: 0 15px;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #b58b3a;
+    }
+
+    /* Discord Button */
+    .discord-btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #5865F2;
+      color: #fff !important;
+      border-radius: 12px;
+      padding: 10px 20px;
+      font-size: 0.95rem;
+      box-shadow: 0 4px 15px rgba(88, 101, 242, 0.3);
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .discord-btn:hover {
+      background: #4752c4;
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 8px 25px rgba(88, 101, 242, 0.5);
+    }
+
+    .discord-btn svg {
+      width: 20px;
+      fill: #fff;
+    }
+
+    /* Hero Section */
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      min-height: 85vh;
+      position: relative;
+    }
+
+    .hero img {
+      width: 200px;
+      border-radius: 50%;
+      margin-bottom: 25px;
+      animation: float 6s ease-in-out infinite;
+      filter: drop-shadow(0 10px 30px rgba(181, 139, 58, 0.4));
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); } 
+      50% { transform: translateY(-20px); } 
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      background: linear-gradient(90deg, #5d4037, #b58b3a);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 10px;
+    }
+
+    .hero .btn {
+      margin-top: 45px; /* Tiefer gesetzter IP-Button */
+      padding: 18px 45px;
+      border-radius: 14px;
+      border: none;
+      background: #5d4037;
+      color: white;
+      font-weight: bold;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: all 0.3s;
+      box-shadow: 0 8px 20px rgba(93, 64, 55, 0.2);
+    }
+
+    .hero .btn:hover {
+      background: #b58b3a;
+      transform: scale(1.05);
+      box-shadow: 0 12px 25px rgba(181, 139, 58, 0.3);
+    }
+
+    /* Content Sections */
+    section {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 100px 20px;
+      text-align: center;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 50px;
+      margin-top: 50px;
+    }
+
+    .card {
+      padding: 40px 30px;
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      transition: all 0.4s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      background: #fff;
+      box-shadow: 0 20px 40px rgba(181, 139, 58, 0.15);
+    }
+
+    /* Footer & Imprint */
+    footer {
+      background: #fff;
+      padding: 60px 20px 30px;
+      margin-top: 100px;
+      border-top-left-radius: 50px;
+      border-top-right-radius: 50px;
+      text-align: center;
+    }
+
+    .footer-links {
+      margin-bottom: 20px;
+    }
+
+    .footer-links a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: #888;
+      font-size: 0.9rem;
+      transition: color 0.3s;
+    }
+
+    .footer-links a:hover {
+      color: #b58b3a;
+    }
+
+    /* Scroll To Top Button */
+    #scrollTopBtn {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: #b58b3a;
+      color: white;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      z-index: 100;
+      transition: transform 0.3s;
+    }
+
+    #scrollTopBtn:hover {
+      transform: translateY(-5px);
+    }
+
+    /* Toast Notification CSS */
+    .toast-notification {
+      position: fixed;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(93, 64, 55, 0.95);
+      color: white;
+      padding: 16px 28px;
+      border-radius: 16px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+      backdrop-filter: blur(10px);
+      z-index: 9999;
+      border: 1px solid rgba(181, 139, 58, 0.4);
+      animation: slideUp 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(60px) translateX(-50%); }
+      to { opacity: 1; transform: translateY(0) translateX(-50%); }
+    }
+
+    @media (max-width: 768px) {
+      header { padding: 15px 20px; flex-direction: column; gap: 15px; }
+      .hero h1 { font-size: 2.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo" onclick="window.scrollTo(0,0)">
+    <img src="coconut.png" alt="Coconut Logo">
+    <h2>CoconutSMP</h2>
+  </div>
+  <nav>
+    <a href="#">Home</a>
+    <a href="#about">Über uns</a>
+    <a href="#features">Features</a>
+    <a href="https://discord.gg/coconutsmp" class="discord-btn" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M20.317 4.369a19.791 19.791 0 0 0-4.885-1.515.07.07 0 0 0-.073.035c-.211.375-.444.864-.608 1.249a18.524 18.524 0 0 0-5.487 0 12.683 12.683 0 0 0-.617-1.249.07.07 0 0 0-.073-.035A19.736 19.736 0 0 0 3.677 4.369a.064.064 0 0 0-.03.027C.533 8.159-.32 11.81.099 15.404a.08.08 0 0 0 .028.056c2.052 1.507 4.042 2.422 5.992 3.029a.077.077 0 0 0 .084-.027c.461-.63.873-1.295 1.226-1.994a.076.076 0 0 0-.041-.104c-.652-.247-1.27-.549-1.872-.892a.077.077 0 0 1-.008-.127c.126-.094.252-.192.371-.291a.07.07 0 0 1 .068-.01c3.927 1.793 8.18 1.793 12.061 0a.07.07 0 0 1 .069.009c.12.099.245.197.372.291a.077.077 0 0 1-.006.127 12.298 12.298 0 0 1-1.873.892.076.076 0 0 0-.04.105c.36.699.772 1.364 1.225 1.993a.076.076 0 0 0 .084.028c1.961-.607 3.951-1.522 6.003-3.029a.077.077 0 0 0 .028-.055c.5-4.09-.838-7.713-3.548-10.998a.061.061 0 0 0-.03-.028zM8.02 15.331c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.418 2.157-2.418 1.21 0 2.175 1.094 2.157 2.418 0 1.334-.955 2.419-2.157 2.419zm7.974 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.418 2.157-2.418 1.21 0 2.175 1.094 2.157 2.418 0 1.334-.947 2.419-2.157 2.419z"/></svg>
+      Discord
+    </a>
+  </nav>
+</header>
+
+<div class="hero">
+  <img src="coconut.png" alt="Coconut Logo">
+  <h1>CoconutSMP</h1>
+  <p>Dein ultimatives Survival-Abenteuer 🥥</p>
+  <button class="btn" onclick="joinServer()">IP KOPIEREN</button>
+</div>
+
+<section id="about">
+  <h2>Über unser Projekt</h2>
+  <p>Wir bei CoconutSMP legen Wert auf eine entspannte Atmosphäre ohne Griefing. Unser Ziel ist es, eine Welt zu schaffen, in der jeder Spieler seine Träume verwirklichen kann – egal ob technisches Redstone oder kunstvolles Bauen.</p>
+</section>
+
+<section id="features">
+  <h2>Warum bei uns spielen?</h2>
+  <div class="cards">
+    <div class="card">
+      <h3>🌴 Community</h3>
+      <p>Wir wachsen stetig und halten zusammen. Regelmäßige Events sorgen für Abwechslung.</p>
+    </div>
+    <div class="card">
+      <h3>🥥 Survival</h3>
+      <p>Erlebe Minecraft so, wie es sein sollte. Mit nützlichen Erweiterungen, die das Spielgefühl verbessern.</p>
+    </div>
+    <div class="card">
+      <h3>⚡ Performance</h3>
+      <p>Dank High-End Hardware garantieren wir ein flüssiges Spielerlebnis ohne Lags.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-links">
+    <a href="javascript:void(0)" onclick="alert('Hier dein Impressum Text einfügen')">Impressum</a>
+    <a href="javascript:void(0)" onclick="alert('Hier deine Datenschutzerklärung einfügen')">Datenschutz</a>
+    <a href="https://discord.gg/coconutsmp" target="_blank">Support</a>
+  </div>
+  <p>© 2026 CoconutSMP. All rights reserved.</p>
+  <p style="font-size: 0.8rem; margin-top: 10px; opacity: 0.5;">Not an official Minecraft product. Not approved by or associated with Mojang.</p>
+</footer>
+
+<button id="scrollTopBtn" onclick="window.scrollTo(0,0)">↑</button>
+
+<script>
+// Schöne Notification Utility
+function showToast(message) {
+  // Verhindert doppelte Toasts
+  const existingToast = document.querySelector('.toast-notification');
+  if (existingToast) existingToast.remove();
+
+  const toast = document.createElement('div');
+  toast.className = 'toast-notification';
+  toast.innerHTML = `
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <span style="font-size: 22px;">🥥</span>
+      <div style="text-align: left;">
+        <div style="font-weight: bold; font-size: 1rem;">IP Kopiert!</div>
+        <div style="font-size: 0.85rem; opacity: 0.8;">${message}</div>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(toast);
+
+  // Nach 3 Sekunden entfernen
+  setTimeout(() => {
+    toast.style.opacity = '0';
+    toast.style.transform = 'translateY(20px) translateX(-50%)';
+    setTimeout(() => toast.remove(), 500);
+  }, 3000);
+}
+
+// IP Kopieren Funktion
+function joinServer() {
+  const ip = "play.coconutsmp.de";
+  navigator.clipboard.writeText(ip).then(() => {
+    showToast(ip);
+  }).catch(err => {
+    // Fallback falls Clipboard-API fehlschlägt
+    alert("Server IP: " + ip);
+  });
+}
+
+// Scroll-To-Top Button Logik
+window.onscroll = function() {
+  let btn = document.getElementById("scrollTopBtn");
+  if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+    btn.style.display = "flex";
+  } else {
+    btn.style.display = "none";
+  }
+};
+</script>
+
+</body>
+</html>
